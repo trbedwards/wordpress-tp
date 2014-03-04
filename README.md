@@ -1,4 +1,4 @@
 wordpress-tp
 ============
 
-repository for testing wordpress plugin.
+repository for testing wordpress plugin. !!
