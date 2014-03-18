@@ -14,6 +14,9 @@
  * @package WordPress
  */
 
+/** DBG: put this here to fix problem with css not loading */
+define(‘CONCATENATE_SCRIPTS’, false );
+
 // ** Heroku Postgres settings - from Heroku Environment ** //
 $db = parse_url($_ENV["DATABASE_URL"]);
 
