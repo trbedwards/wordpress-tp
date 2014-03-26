@@ -161,6 +161,32 @@ function wppb_default_settings(){
 						<input type="radio" name="wppb_default_settings[jabberRequired]" value="no" <?php if ($wppb_defaultOptions['jabberRequired'] == 'no') echo 'checked';?> /><font size="1"><?php _e('No', 'profilebuilder');?></font>
 					</td> 						
 				</tr>
+				<tr>  
+					<td id="manage-columnCell"> 
+						<span style="padding-left:50px"></span><?php _e('Twitter', 'profilebuilder');?>
+					</td> 
+					<td id="manage-columnCell"> 
+						<input type="radio" name="wppb_default_settings[twitter]" value="show" <?php if ($wppb_defaultOptions['twitter'] == 'show') echo 'checked';?> /><font size="1"><?php _e('Show', 'profilebuilder');?></font><span style="padding-left:20px"></span>
+						<input type="radio" name="wppb_default_settings[twitter]" value="hide" <?php if ($wppb_defaultOptions['twitter'] == 'hide') echo 'checked';?> /><font size="1"><?php _e('Hide', 'profilebuilder');?></font>
+					</td>
+					<td id="manage-columnCell"> 
+						<input type="radio" name="wppb_default_settings[twitterRequired]" value="yes" <?php if ($wppb_defaultOptions['twitterRequired'] == 'yes') echo 'checked';?> /><font size="1"><?php _e('Yes', 'profilebuilder');?></font><span style="padding-left:20px"></span>
+						<input type="radio" name="wppb_default_settings[twitterRequired]" value="no" <?php if ($wppb_defaultOptions['twitterRequired'] == 'no') echo 'checked';?> /><font size="1"><?php _e('No', 'profilebuilder');?></font>
+					</td> 						
+				</tr>
+				<tr>  
+					<td id="manage-columnCell"> 
+						<span style="padding-left:50px"></span><?php _e('Telephone', 'profilebuilder');?>
+					</td> 
+					<td id="manage-columnCell"> 
+						<input type="radio" name="wppb_default_settings[telephone]" value="show" <?php if ($wppb_defaultOptions['telephone'] == 'show') echo 'checked';?> /><font size="1"><?php _e('Show', 'profilebuilder');?></font><span style="padding-left:20px"></span>
+						<input type="radio" name="wppb_default_settings[telephone]" value="hide" <?php if ($wppb_defaultOptions['telephone'] == 'hide') echo 'checked';?> /><font size="1"><?php _e('Hide', 'profilebuilder');?></font>
+					</td>
+					<td id="manage-columnCell"> 
+						<input type="radio" name="wppb_default_settings[telephoneRequired]" value="yes" <?php if ($wppb_defaultOptions['telephoneRequired'] == 'yes') echo 'checked';?> /><font size="1"><?php _e('Yes', 'profilebuilder');?></font><span style="padding-left:20px"></span>
+						<input type="radio" name="wppb_default_settings[telephoneRequired]" value="no" <?php if ($wppb_defaultOptions['telephoneRequired'] == 'no') echo 'checked';?> /><font size="1"><?php _e('No', 'profilebuilder');?></font>
+					</td> 						
+				</tr>
 			<tbody class="plugins">
 				<tr> 
 					<td  colspan="3"><font size="2"><?php _e('About Yourself:', 'profilebuilder');?></font></td> 

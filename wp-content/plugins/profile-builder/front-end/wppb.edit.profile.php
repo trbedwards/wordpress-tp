@@ -111,7 +111,7 @@ function wppb_front_end_profile_info() {
 				}
 			}
 		}
-			
+
 		if ($wppb_defaultOptions['dispname'] == 'show'){
 			$_POST['display_name'] =  apply_filters('wppb_edit_profile_posted_display_name_check', $_POST['display_name']);
 			if ($wppb_defaultOptions['dispnameRequired'] == 'yes'){
@@ -153,6 +153,24 @@ function wppb_front_end_profile_info() {
 			if ($wppb_defaultOptions['jabberRequired'] == 'yes'){
 				if (isset($_POST['jabber']) && (trim($_POST['jabber']) == '')){
 					$allRequiredCompleted = 'no'; 
+				}
+			}
+		}
+
+		if ($wppb_defaultOptions['twitter'] == 'show'){
+			$_POST['twitter'] =  apply_filters('wppb_edit_profile_posted_twitter_check', $_POST['twitter']);
+			if ($wppb_defaultOptions['twitterRequired'] == 'yes'){
+				if (isset($_POST['twitter']) && (trim($_POST['twitter']) == '')){
+					$allRequiredCompleted = 'no'; 
+				}
+			}
+		}
+			
+		if ($wppb_defaultOptions['telephone'] == 'show'){
+			$_POST['telephone'] =  apply_filters('wppb_edit_profile_posted_telephone_check', $_POST['telephone']);
+			if ($wppb_defaultOptions['telephoneRequired'] == 'yes'){
+				if (isset($_POST['telephone']) && (trim($_POST['telephone']) == '')){
+					$allRequiredCompleted = 'no';
 				}
 			}
 		}
@@ -403,7 +421,7 @@ function wppb_front_end_profile_info() {
 			}
 
 		}
-			
+
 		if ($wppb_defaultOptions['dispname'] == 'show'){
 			$_POST['display_name'] =  apply_filters('wppb_edit_profile_posted_display_name', $_POST['display_name']);
 			if ($wppb_defaultOptions['dispnameRequired'] == 'yes'){
@@ -482,6 +500,32 @@ function wppb_front_end_profile_info() {
 				}
 			}else{
 				update_user_meta( $current_user->ID, 'jabber', esc_attr( $_POST['jabber'] ) );
+				$changesSaved = 'yes';
+			}
+		}
+
+		if ($wppb_defaultOptions['twitter'] == 'show'){
+			$_POST['twitter'] =  apply_filters('wppb_edit_profile_posted_twitter', $_POST['twitter']);
+			if ($wppb_defaultOptions['twitterRequired'] == 'yes'){
+				if (isset($_POST['twitter']) && (trim($_POST['twitter']) != '')){
+					update_user_meta( $current_user->ID, 'twitter', esc_attr( $_POST['twitter'] ) );
+					$changesSaved = 'yes';
+				}
+			}else{
+				update_user_meta( $current_user->ID, 'twitter', esc_attr( $_POST['twitter'] ) );
+				$changesSaved = 'yes';
+			}
+		}
+			
+		if ($wppb_defaultOptions['telephone'] == 'show'){
+			$_POST['telephone'] =  apply_filters('wppb_edit_profile_posted_telephone', $_POST['telephone']);
+			if ($wppb_defaultOptions['telephoneRequired'] == 'yes'){
+				if (isset($_POST['telephone']) && (trim($_POST['telephone']) != '')){
+					update_user_meta( $current_user->ID, 'telephone', esc_attr( $_POST['telephone'] ) );
+					$changesSaved = 'yes';
+				}
+			}else{
+				update_user_meta( $current_user->ID, 'telephone', esc_attr( $_POST['telephone'] ) );
 				$changesSaved = 'yes';
 			}
 		}
@@ -946,7 +990,7 @@ function wppb_front_end_profile_info() {
 						</p><!-- .nickname -->';
 					$editProfileFilterArray2['contentName5'] = apply_filters('wppb_edit_profile_content_name5', $editProfileFilterArray2['contentName5'], $current_user->ID, $errorVar, $errorMark);	
 				}
-					
+
 				if ($wppb_defaultOptions['dispname'] == 'show'){
 					$errorVar = '';
 					$errorMark = '';
@@ -1091,6 +1135,42 @@ function wppb_front_end_profile_info() {
 							<input class="text-input" name="jabber" type="text" id="jabber" value="'. get_the_author_meta( 'jabber', $current_user->ID ) .'" />
 						</p><!-- .form-jabber -->';
 					$editProfileFilterArray2['contentInfo6'] = apply_filters('wppb_edit_profile_content_info6', $editProfileFilterArray2['contentInfo6'], $current_user->ID, $errorVar, $errorMark);
+				}
+
+				if ($wppb_defaultOptions['twitter'] == 'show'){
+					$errorVar = '';
+					$errorMark = '';
+					if ($wppb_defaultOptions['twitterRequired'] == 'yes'){
+						$errorMark = '<font color="red" title="'. __('This field is marked as required by the administrator.', 'profilebuilder') .'">*</font>';
+						if (isset($_POST['twitter']) && (trim($_POST['twitter']) == '')){
+							$errorMark = '<img src="'.WPPB_PLUGIN_URL . 'assets/images/pencil_delete.png" title="'. __('This field wasn\'t updated because you entered and empty string (It was marked as required by the administrator.', 'profilebuilder') .'"/>';
+							$errorVar = ' errorHolder';
+						}
+					}					
+					$editProfileFilterArray2['contentInfo7'] = '
+						<p class="form-twitter'.$errorVar.'">
+							<label for="twitter">'. __('Twitter', 'profilebuilder') .$errorMark.'</label>
+							<input class="text-input" name="twitter" type="text" id="twitter" value="'. get_the_author_meta( 'twitter', $current_user->ID ) .'" />
+						</p><!-- .form-twitter -->';
+					$editProfileFilterArray2['contentInfo7'] = apply_filters('wppb_edit_profile_content_info7', $editProfileFilterArray2['contentInfo7'], $current_user->ID, $errorVar, $errorMark);
+				}
+
+				if ($wppb_defaultOptions['telephone'] == 'show'){
+					$errorVar = '';
+					$errorMark = '';
+					if ($wppb_defaultOptions['telephoneRequired'] == 'yes'){
+						$errorMark = '<font color="red" title="'. __('This field is marked as required by the administrator.', 'profilebuilder') .'">*</font>';
+						if (isset($_POST['telephone']) && (trim($_POST['telephone']) == '')){
+							$errorMark = '<img src="'.WPPB_PLUGIN_URL . 'assets/images/pencil_delete.png" title="'. __('This field wasn\'t updated because you entered and empty string (It was marked as required by the administrator.', 'profilebuilder') .'"/>';
+							$errorVar = ' errorHolder';
+						}
+					}					
+					$editProfileFilterArray2['contentTel'] = '
+						<p class="form-telephone'.$errorVar.'">
+							<label for="telephone">'. __('telephone', 'profilebuilder') .$errorMark.'</label>
+							<input class="text-input" name="telephone" type="text" id="telephone" value="'. get_the_author_meta( 'telephone', $current_user->ID ) .'" />
+						</p><!-- .form-telephone -->';
+					$editProfileFilterArray2['contentTel'] = apply_filters('wppb_edit_profile_content_Tel', $editProfileFilterArray2['contentTel'], $current_user->ID, $errorVar, $errorMark);
 				}
 					
 				$editProfileFilterArray2['aboutYourself1'] = '<p class="aboutYourselfHeader"><strong>'. __('About Yourself', 'profilebuilder') .'</strong></p>';

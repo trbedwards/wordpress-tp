@@ -259,6 +259,8 @@ function wppb_front_end_register($atts){
 	$aimComplete = 'yes';
 	$yahooComplete = 'yes';
 	$jabberComplete = 'yes';
+	$twitterComplete = 'yes';
+	$telephoneComplete = 'yes';
 	$bioComplete = 'yes';
 	/* END variables used to verify if all required fields were submitted*/
 	
@@ -329,6 +331,12 @@ function wppb_front_end_register($atts){
 		$jabber = '';
 		if (isset($_POST['jabber']))
 			$jabber = trim ($_POST['jabber']);
+		$twitter = '';
+		if (isset($_POST['twitter']))
+			$twitter = trim ($_POST['twitter']);
+		$telephone = '';
+		if (isset($_POST['telephone']))
+			$telephone = trim ($_POST['telephone']);
 		$description = '';
 		if (isset($_POST['description']))
 			$description = trim ($_POST['description']);
@@ -344,6 +352,8 @@ function wppb_front_end_register($atts){
 		$aim = apply_filters('wppb_register_posted_aim', $aim);
 		$yim = apply_filters('wppb_register_posted_yahoo', $yim);
 		$jabber = apply_filters('wppb_register_posted_jabber', $jabber);
+		$twitter = apply_filters('wppb_register_posted_twitter', $twitter);
+		$telephone = apply_filters('wppb_register_posted_telephone', $telephone);
 		$description = apply_filters('wppb_register_posted_bio', $description);
 		/* END use filters to modify (if needed) the posted data before creating the user-data */
 		
@@ -358,6 +368,8 @@ function wppb_front_end_register($atts){
 			'aim' => esc_attr( $aim ),
 			'yim' => esc_attr( $yim ),
 			'jabber' => esc_attr( $jabber ),
+			'twitter' => esc_attr( $twitter ),
+			'telephone' => esc_attr( $telephone ),
 			'description' => esc_attr( $description ),
 			'role' => $aprovedRole);
 		$userdata = apply_filters('wppb_register_userdata', $userdata);
@@ -399,7 +411,7 @@ function wppb_front_end_register($atts){
 			if (($wppb_defaultOptions['nicknameRequired'] == 'yes') && (trim($_POST['nickname']) == ''))
 				$nicknameComplete = 'no';
 		}
-		
+
 		if($wppb_defaultOptions['website'] == 'show'){
 			if (($wppb_defaultOptions['websiteRequired'] == 'yes') && (trim($_POST['website']) == ''))
 				$websiteComplete = 'no';
@@ -418,6 +430,16 @@ function wppb_front_end_register($atts){
 		if($wppb_defaultOptions['jabber'] == 'show'){
 			if (($wppb_defaultOptions['jabberRequired'] == 'yes') && (trim($_POST['jabber']) == ''))
 				$jabberComplete = 'no';
+		}
+
+		if($wppb_defaultOptions['twitter'] == 'show'){
+			if (($wppb_defaultOptions['twitterRequired'] == 'yes') && (trim($_POST['twitter']) == ''))
+				$twitterComplete = 'no';
+		}
+
+		if($wppb_defaultOptions['telephone'] == 'show'){
+			if (($wppb_defaultOptions['telephoneRequired'] == 'yes') && (trim($_POST['telephone']) == ''))
+				$telephoneComplete = 'no';
 		}
 		
 		if($wppb_defaultOptions['bio'] == 'show'){
@@ -614,7 +636,7 @@ function wppb_front_end_register($atts){
 			$error = __('You must agree to the terms and conditions before registering!', 'profilebuilder');
 		elseif(isset($failReason))
 			$error = __('The account was NOT created!', 'profilebuilder') .'<br/>'. $failReason;
-		elseif(($firstnameComplete == 'no' || $lastnameComplete == 'no' ||	$nicknameComplete == 'no' || $websiteComplete == 'no' || $aimComplete == 'no' || $yahooComplete == 'no' ||	$jabberComplete == 'no' ||	$bioComplete == 'no' ) || !empty($extraFieldsErrorHolder))
+		elseif(($firstnameComplete == 'no' || $lastnameComplete == 'no' ||	$nicknameComplete == 'no' || $telephoneComplete == 'no' || $websiteComplete == 'no' || $aimComplete == 'no' || $yahooComplete == 'no' || $jabberComplete == 'no' ||	$twitterComplete == 'no' ||	$bioComplete == 'no' ) || !empty($extraFieldsErrorHolder))
 			$error = __('The account was NOT created!', 'profilebuilder') .'<br/>'. __('(Several required fields were left uncompleted)', 'profilebuilder');
 		else{
 			$registered_name = $_POST['user_name'];
@@ -655,6 +677,8 @@ function wppb_front_end_register($atts){
 							'aim' => $userdata['aim'],
 							'yim' => $userdata['yim'],
 							'jabber' => $userdata['jabber'],
+							'twitter' => $userdata['twitter'],
+							'telephone' => $userdata['telephone'],
 							'description' => $userdata['description'],
 							'role' => $userdata['role']
 						);
@@ -829,6 +853,8 @@ function wppb_front_end_register($atts){
 						'aim' => $userdata['aim'],
 						'yim' => $userdata['yim'],
 						'jabber' => $userdata['jabber'],
+						'twitter' => $userdata['twitter'],
+						'telephone' => $userdata['telephone'],
 						'description' => $userdata['description'],
 						'role' => $userdata['role']
 					);
@@ -1222,6 +1248,54 @@ function wppb_front_end_register($atts){
 									<input class="text-input" name="jabber" type="text" id="jabber" value="'.trim($localVar).'" />
 								</p><!-- .form-jabber -->';
 							$registerFilterArray2['info6'] = apply_filters('wppb_register_content_info6', $registerFilterArray2['info6'], trim($localVar), $errorVar, $errorMark);
+						}
+
+						if ($wppb_defaultOptions['twitter'] == 'show'){
+							$errorVar = '';
+							$errorMark = '';
+							if ($wppb_defaultOptions['twitterRequired'] == 'yes'){
+								$errorMark = '<font color="red" title="'.__('This field is marked as required by the administrator', 'profilebuilder').'">*</font>';
+								if (isset($_POST['twitter'])){
+									if (trim($_POST['twitter']) == ''){
+										$errorMark = '<img src="'.WPPB_PLUGIN_URL . 'assets/images/pencil_delete.png" title="'.__('This field must be filled out before registering (It was marked as required by the administrator)', 'profilebuilder').'"/>';
+										$errorVar = ' errorHolder';
+									}
+								}
+							}						
+						
+							$localVar = '';
+							if (isset($_POST['twitter']))
+								$localVar = $_POST['twitter'];
+							$registerFilterArray2['info7'] = '
+								<p class="form-twitter'.$errorVar.'">
+									<label for="twitter">'. __('Twitter', 'profilebuilder') .$errorMark.'</label>
+									<input class="text-input" name="twitter" type="text" id="twitter" value="'.trim($localVar).'" />
+								</p><!-- .form-twitter -->';
+							$registerFilterArray2['info7'] = apply_filters('wppb_register_content_info7', $registerFilterArray2['info7'], trim($localVar), $errorVar, $errorMark);
+						}
+
+						if ($wppb_defaultOptions['telephone'] == 'show'){
+							$errorVar = '';
+							$errorMark = '';
+							if ($wppb_defaultOptions['telephoneRequired'] == 'yes'){
+								$errorMark = '<font color="red" title="'.__('This field is marked as required by the administrator', 'profilebuilder').'">*</font>';
+								if (isset($_POST['telephone'])){
+									if (trim($_POST['telephone']) == ''){
+										$errorMark = '<img src="'.WPPB_PLUGIN_URL . 'assets/images/pencil_delete.png" title="'.__('This field must be filled out before registering (It was marked as required by the administrator)', 'profilebuilder').'"/>';
+										$errorVar = ' errorHolder';
+									}
+								}
+							}
+							
+							$localVar = '';
+							if (isset($_POST['telephone']))
+								$localVar = $_POST['telephone'];
+							$registerFilterArray2['tel'] = '
+								<p class="telephone'.$errorVar.'">
+									<label for="telephone">'. __('Telephone', 'profilebuilder') .$errorMark.'</label>
+									<input class="text-input" name="telephone" type="text" id="telephone" value="'.trim($localVar).'" />
+								</p><!-- .telephone -->';
+							$registerFilterArray2['tel'] = apply_filters('wppb_register_content_tel', $registerFilterArray2['tel'], trim($localVar), $errorVar, $errorMark);
 						}
 						
 						$registerFilterArray2['ay1'] = '<p class="registerAboutYourselfHeader"><strong>'. __('About Yourself', 'profilebuilder') .'</strong></p>';

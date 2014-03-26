@@ -161,6 +161,10 @@ function wppb_add_meta_to_user_on_activation($user_id, $password, $meta){
 		update_user_meta( $user_id, 'yim', $meta['yim'] );
 	if( !empty($meta['jabber'] ) )
 		update_user_meta( $user_id, 'jabber', $meta['jabber'] );
+	if( !empty($meta['twitter'] ) )
+		update_user_meta( $user_id, 'twitter', $meta['twitter'] );
+	if( !empty($meta['telephone'] ) )
+		update_user_meta( $user_id, 'telephone', $meta['telephone'] );
 	if( !empty($meta['description'] ) )
 		update_user_meta( $user_id, 'description', $meta['description'] );
 	
