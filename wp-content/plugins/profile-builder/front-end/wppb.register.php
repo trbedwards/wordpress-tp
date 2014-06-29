@@ -922,7 +922,7 @@ function wppb_front_end_register($atts){
 							echo $registerFilterArray['wpmuRegistrationMessage2'] = apply_filters('wppb_register_account_created2', $registerFilterArray['wpmuRegistrationMessage2'], $registered_name);
 						
 						}else{
-							$registerFilterArray['registrationMessage2'] = '<p class="success">' . sprintf(__( 'Thank you for registering %1$s.', 'profilebuilder'), $registered_name) .'</p><!-- .success -->';
+							$registerFilterArray['registrationMessage2'] = '<p class="success">' . sprintf(__( 'Thank you for registering %1$s. Once we approve your account, we will send you a confirmation email and you can then login.', 'profilebuilder'), $registered_name) .'</p><!-- .success -->';
 							echo $registerFilterArray['registrationMessage2'] = apply_filters('wppb_register_account_created2', $registerFilterArray['registrationMessage2'], $registered_name);
 						}
 						
